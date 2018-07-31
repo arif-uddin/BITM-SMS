@@ -43,8 +43,12 @@
             this.minimizeButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.formPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuPanel.SuspendLayout();
             this.headerTopPanel.SuspendLayout();
+            this.formPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPanel
@@ -82,7 +86,7 @@
             this.salesInfoButton.ForeColor = System.Drawing.Color.White;
             this.salesInfoButton.Image = ((System.Drawing.Image)(resources.GetObject("salesInfoButton.Image")));
             this.salesInfoButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.salesInfoButton.Location = new System.Drawing.Point(21, 456);
+            this.salesInfoButton.Location = new System.Drawing.Point(21, 451);
             this.salesInfoButton.Name = "salesInfoButton";
             this.salesInfoButton.Size = new System.Drawing.Size(183, 55);
             this.salesInfoButton.TabIndex = 2;
@@ -103,7 +107,7 @@
             this.summaryButton.ForeColor = System.Drawing.Color.White;
             this.summaryButton.Image = ((System.Drawing.Image)(resources.GetObject("summaryButton.Image")));
             this.summaryButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.summaryButton.Location = new System.Drawing.Point(21, 525);
+            this.summaryButton.Location = new System.Drawing.Point(21, 519);
             this.summaryButton.Name = "summaryButton";
             this.summaryButton.Size = new System.Drawing.Size(183, 55);
             this.summaryButton.TabIndex = 2;
@@ -124,7 +128,7 @@
             this.aboutButton.ForeColor = System.Drawing.Color.White;
             this.aboutButton.Image = ((System.Drawing.Image)(resources.GetObject("aboutButton.Image")));
             this.aboutButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.aboutButton.Location = new System.Drawing.Point(21, 594);
+            this.aboutButton.Location = new System.Drawing.Point(21, 587);
             this.aboutButton.Name = "aboutButton";
             this.aboutButton.Size = new System.Drawing.Size(183, 55);
             this.aboutButton.TabIndex = 2;
@@ -145,7 +149,7 @@
             this.stockOutButton.ForeColor = System.Drawing.Color.White;
             this.stockOutButton.Image = ((System.Drawing.Image)(resources.GetObject("stockOutButton.Image")));
             this.stockOutButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.stockOutButton.Location = new System.Drawing.Point(21, 387);
+            this.stockOutButton.Location = new System.Drawing.Point(21, 383);
             this.stockOutButton.Name = "stockOutButton";
             this.stockOutButton.Size = new System.Drawing.Size(183, 55);
             this.stockOutButton.TabIndex = 2;
@@ -166,7 +170,7 @@
             this.stockInButton.ForeColor = System.Drawing.Color.White;
             this.stockInButton.Image = ((System.Drawing.Image)(resources.GetObject("stockInButton.Image")));
             this.stockInButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.stockInButton.Location = new System.Drawing.Point(21, 318);
+            this.stockInButton.Location = new System.Drawing.Point(21, 315);
             this.stockInButton.Name = "stockInButton";
             this.stockInButton.Size = new System.Drawing.Size(183, 55);
             this.stockInButton.TabIndex = 2;
@@ -187,7 +191,7 @@
             this.itemButton.ForeColor = System.Drawing.Color.White;
             this.itemButton.Image = ((System.Drawing.Image)(resources.GetObject("itemButton.Image")));
             this.itemButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.itemButton.Location = new System.Drawing.Point(21, 111);
+            this.itemButton.Location = new System.Drawing.Point(21, 247);
             this.itemButton.Name = "itemButton";
             this.itemButton.Size = new System.Drawing.Size(183, 55);
             this.itemButton.TabIndex = 2;
@@ -208,7 +212,7 @@
             this.companyButton.ForeColor = System.Drawing.Color.White;
             this.companyButton.Image = ((System.Drawing.Image)(resources.GetObject("companyButton.Image")));
             this.companyButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.companyButton.Location = new System.Drawing.Point(21, 249);
+            this.companyButton.Location = new System.Drawing.Point(21, 179);
             this.companyButton.Name = "companyButton";
             this.companyButton.Size = new System.Drawing.Size(183, 55);
             this.companyButton.TabIndex = 2;
@@ -229,7 +233,7 @@
             this.categoryButton.ForeColor = System.Drawing.Color.White;
             this.categoryButton.Image = ((System.Drawing.Image)(resources.GetObject("categoryButton.Image")));
             this.categoryButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.categoryButton.Location = new System.Drawing.Point(21, 180);
+            this.categoryButton.Location = new System.Drawing.Point(21, 111);
             this.categoryButton.Name = "categoryButton";
             this.categoryButton.Size = new System.Drawing.Size(183, 55);
             this.categoryButton.TabIndex = 2;
@@ -284,11 +288,44 @@
             // 
             // formPanel
             // 
-            this.formPanel.BackColor = System.Drawing.Color.Silver;
+            this.formPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.formPanel.Controls.Add(this.label3);
+            this.formPanel.Controls.Add(this.label2);
+            this.formPanel.Controls.Add(this.label1);
             this.formPanel.Location = new System.Drawing.Point(207, 52);
             this.formPanel.Name = "formPanel";
             this.formPanel.Size = new System.Drawing.Size(1073, 672);
             this.formPanel.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(370, 90);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(306, 70);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Welcome";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(202, 182);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(613, 55);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Stock Management System";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial Narrow", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(322, 525);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(396, 57);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "অমুক  Company Ltd.";
             // 
             // DashboardForm
             // 
@@ -304,6 +341,8 @@
             this.Text = "Dashboard";
             this.menuPanel.ResumeLayout(false);
             this.headerTopPanel.ResumeLayout(false);
+            this.formPanel.ResumeLayout(false);
+            this.formPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -324,5 +363,8 @@
         private System.Windows.Forms.Button minimizeButton;
         private System.Windows.Forms.Button salesInfoButton;
         private System.Windows.Forms.Button summaryButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
