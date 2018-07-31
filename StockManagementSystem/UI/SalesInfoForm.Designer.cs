@@ -1,6 +1,6 @@
 ﻿namespace StockManagementSystem.UI
 {
-    partial class ItemForm
+    partial class SalesInfoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // ItemForm
+            // SalesInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LemonChiffon;
+            this.BackColor = System.Drawing.Color.LightCoral;
             this.ClientSize = new System.Drawing.Size(1073, 672);
+            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "ItemForm";
-            this.Text = "ItemForm";
+            this.Name = "SalesInfoForm";
+            this.Text = "SalesInfoForm";
             this.ResumeLayout(false);
 
         }
