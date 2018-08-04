@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace StockManagementSystem.Models
 {
-    class Company
+    class User
     {
-        public string Name { get; set; }
-        public int Id { get; set; } 
+        public string userName { get; set; }
+        public string PassWord { get; set; }
+        public int userType { get; set; }
     }
 }

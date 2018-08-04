@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using StockManagementSystem.Models;
 
 namespace StockManagementSystem.UI
 {
@@ -24,23 +27,22 @@ namespace StockManagementSystem.UI
         public static extern bool ReleaseCapture();
         //From move with Movedawn end
 
+        private string connectionString =
+        ConfigurationManager.ConnectionStrings["StockConnectionString"].ConnectionString;
+
+        //sql connection
+        private SqlConnection connection;
 
 
-        //Form Objects
-        ItemForm _itemForm = new ItemForm();
-        CategoryForm _categoryForm =new CategoryForm();
-        CompanyForm _companyForm =new CompanyForm();
-        StockInForm _stockInForm =new StockInForm();
-        StockOutForm _stockOutForm =new StockOutForm();
-        SalesInfoForm _salesInfoForm=new SalesInfoForm();
-        SummaryForm _summaryForm=new SummaryForm();
-        AboutForm _aboutForm=new AboutForm();
+        FormCommon _common = new FormCommon();
 
+       
 
         public DashboardForm()
         {
             InitializeComponent();
-
+            connection = new SqlConnection(connectionString);
+           
         }
         
         
@@ -171,47 +173,67 @@ namespace StockManagementSystem.UI
         //button indicator move ,Form appear
         public void itemButton_Click(object sender, EventArgs e)
         {
+            buttonIndicatorPanel.Visible = true;
+
+            ItemForm _itemForm = new ItemForm();
             ButtonIndicatorMove(itemButton);
             ShowForm(_itemForm);
+
         }
         private void categoryButton_Click(object sender, EventArgs e)
         {
+            buttonIndicatorPanel.Visible = true;
+
+            CategoryForm _categoryForm = new CategoryForm();
             ButtonIndicatorMove(categoryButton);
             ShowForm(_categoryForm);
         }
 
         private void companyButton_Click(object sender, EventArgs e)
         {
+            buttonIndicatorPanel.Visible = true;
+            CompanyForm _companyForm = new CompanyForm();
             ButtonIndicatorMove(companyButton);
             ShowForm(_companyForm);
+           
         }
 
         private void stockInButton_Click(object sender, EventArgs e)
         {
+            buttonIndicatorPanel.Visible = true;
+            StockInForm _stockInForm = new StockInForm();
             ButtonIndicatorMove(stockInButton);
             ShowForm(_stockInForm);
         }
 
         private void stockOutButton_Click(object sender, EventArgs e)
         {
+            buttonIndicatorPanel.Visible = true;
+            StockOutForm _stockOutForm = new StockOutForm();
             ButtonIndicatorMove(stockOutButton);
             ShowForm(_stockOutForm);
         }
 
         private void salesInfoButton_Click(object sender, EventArgs e)
         {
+            buttonIndicatorPanel.Visible = true;
+            SalesInfoForm _salesInfoForm = new SalesInfoForm();
             ButtonIndicatorMove(salesInfoButton);
             ShowForm(_salesInfoForm);
         }
 
         private void summaryButton_Click(object sender, EventArgs e)
         {
+            buttonIndicatorPanel.Visible = true;
+            SummaryForm _summaryForm = new SummaryForm();
             ButtonIndicatorMove(summaryButton);
             ShowForm(_summaryForm);
         }
 
         private void aboutButton_Click(object sender, EventArgs e)
         {
+            buttonIndicatorPanel.Visible = true;
+            AboutForm _aboutForm = new AboutForm();
             ButtonIndicatorMove(aboutButton);
             ShowForm(_aboutForm);
         }
@@ -244,45 +266,36 @@ namespace StockManagementSystem.UI
         //Methods
         private void ShowForm(Form form)
         {
+            CloseAlreadyOpenedForms();
             form.TopLevel = false;
+
             form.AutoScroll = true;
             formPanel.Controls.Add(form);
-            CloseOtherForms();
+            
             form.Show();
             if (form.Visible)
             {
                 form.BringToFront();
             }
+
         }
 
-        private void CloseOtherForms()
+        private void CloseAlreadyOpenedForms()
         {
-            if (_itemForm.Visible || _companyForm.Visible || _categoryForm.Visible || _stockInForm.Visible || _stockOutForm.Visible)
+            var openforms = Application.OpenForms;
+            List<Form> forms = new List<Form>();
+
+            foreach (Form f in openforms )
             {
-                if (_itemForm.Visible)
+                if (f.Name != this.Name)
                 {
-                    _itemForm.Hide();
+                    forms.Add(f);
                 }
+            }
 
-                if (_companyForm.Visible)
-                {
-                    _companyForm.Hide();
-                }
-
-                if (_categoryForm.Visible)
-                {
-                    _categoryForm.Hide();
-                }
-
-                if (_stockInForm.Visible)
-                {
-                    _stockInForm.Hide();
-                }
-
-                if (_stockOutForm.Visible)
-                {
-                    _stockOutForm.Hide();
-                }
+            foreach (var form in forms)
+            {
+                form.Close();
             }
         }
 
@@ -292,8 +305,158 @@ namespace StockManagementSystem.UI
             buttonIndicatorPanel.Top = buttonName.Top;
         }
 
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            User user = new User();
+
+            try
+            {
+                user.userName = userNameTextBox.Text;
+                user.PassWord = passwordTextBox.Text;
+                string loginInfo = @"SELECT UserType FROM Users WHERE UserName='" + user.userName + "'AND Password='" + user.PassWord + "'";
+                connection.Open();
+                SqlCommand command = new SqlCommand(loginInfo, connection);
+                string userType = command.ExecuteScalar().ToString();
+                connection.Close();
+                if (Convert.ToInt32(userType) == 1)
+                {
+                    categoryButton.Enabled = true;
+                    companyButton.Enabled = true;
+                    itemButton.Enabled = true;
+                    stockInButton.Enabled = true;
+                    stockOutButton.Enabled = true;
+                    salesInfoButton.Enabled = true;
+                    summaryButton.Enabled = true;
+                    aboutButton.Enabled = true;
+
+                    homeButton.Visible = true;
+                
+                }
+                else if (Convert.ToInt32(userType) == 2)
+                {
+                    stockOutButton.Enabled = true;
+                    salesInfoButton.Enabled = true;
+                    summaryButton.Enabled = true;
+                }
+
+                userNameTextBox.Hide();
+                passwordTextBox.Hide();
+                loginButton.Hide();
+                logOutButton.Show();
+                
+                //welcomeLabel.Hide();
+                //smsLabel.Hide();
+                //companyNameLabel.Hide();
+
+                userIdentityLabel.Show();
+                userIdentityLabel.Text = userNameTextBox.Text;
+
+                formPanel.Show();
+
+                userNameTextBox.ResetText();
+                passwordTextBox.ResetText();
+
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                MessageBox.Show("Invalid Username Or Password");
+
+            }
+        }
+
+        private void DashboardForm_Load(object sender, EventArgs e)
+        {
+            logOutButton.Hide();
+            buttonIndicatorPanel.Hide();
+            homeButton.Hide();
+            userIdentityLabel.Hide();
+
+            categoryButton.Enabled = false;
+            companyButton.Enabled = false;
+            itemButton.Enabled = false;
+            stockInButton.Enabled = false;
+            stockOutButton.Enabled = false;
+            salesInfoButton.Enabled = false;
+            summaryButton.Enabled = false;
+            aboutButton.Enabled = false;
+
+            userNameTextBox.ForeColor = Color.Gray;
+            userNameTextBox.Text = "<username>";
+            passwordTextBox.ForeColor = Color.Gray;
+            passwordTextBox.Text = "<password>";
+        }
+
+        private void logOutButton_Click(object sender, EventArgs e)
+        {
+            categoryButton.Enabled = false;
+            companyButton.Enabled = false;
+            itemButton.Enabled = false;
+            stockInButton.Enabled = false;
+            stockOutButton.Enabled = false;
+            salesInfoButton.Enabled = false;
+            summaryButton.Enabled = false;
+            aboutButton.Enabled = false;
+
+            userNameTextBox.ForeColor = Color.Gray;
+            userNameTextBox.Text = "<username>";
+            passwordTextBox.ForeColor = Color.Gray;
+            passwordTextBox.PasswordChar='\0';
+            passwordTextBox.Text = "<password>";
+
+            welcomeLabel.Show();
+            smsLabel.Show();
+            companyNameLabel.Show();
+
+            homeButton.Hide();
+
+            userNameTextBox.Show();
+            passwordTextBox.Show();
+            loginButton.Show();
+            logOutButton.Hide();
+            userIdentityLabel.Hide();
+
+            buttonIndicatorPanel.Hide();
+            CloseAlreadyOpenedForms();
+        }
+
+        private void homeButton_Click(object sender, EventArgs e)
+        {
+            CloseAlreadyOpenedForms();
+            UserForm _userForm = new UserForm();
+            ShowForm(_userForm);
+
+
+        }
+
+        private void userNameTextBox_Click(object sender, EventArgs e)
+        {
+            userNameTextBox.ForeColor = Color.Black;
+            userNameTextBox.ResetText();
+        }
+
+        private void passwordTextBox_Click(object sender, EventArgs e)
+        {
+            passwordTextBox.ForeColor = Color.Black;
+            passwordTextBox.PasswordChar = '*';
+            passwordTextBox.ResetText();
+        }
+
+        private void passwordTextBox_Enter(object sender, EventArgs e)
+        {
+            passwordTextBox.ForeColor = Color.Black;
+            passwordTextBox.PasswordChar = '*';
+            passwordTextBox.ResetText();
+        }
+
+        private void userNameTextBox_Enter(object sender, EventArgs e)
+        {
+            userNameTextBox.ForeColor = Color.Black;
+            userNameTextBox.ResetText();
+        }
+
+
         //Methods End
-
-
     }
 }
