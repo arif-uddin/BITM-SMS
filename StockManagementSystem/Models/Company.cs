@@ -8,6 +8,7 @@ namespace StockManagementSystem.Models
 {
     class Company
     {
-        public string Name { get; set; }    
+        public string Name { get; set; }
+        public int Id { get; set; } 
     }
 }
