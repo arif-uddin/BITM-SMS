@@ -21,10 +21,16 @@ namespace StockManagementSystem.Models
            return isAdded;
         }
 
+<<<<<<< HEAD
         //fill gridView with data from db
         public void FillGrid(string fetch, SqlConnection connection, DataGridView myGridView )
         {
           
+=======
+        public void FillGrid(string fetch, SqlConnection connection, DataGridView myGridView )
+        {
+            //fill gridView with data from db
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
            SqlCommand command = new SqlCommand(fetch, connection);
             connection.Open();
             DataTable dt = new DataTable();
@@ -33,11 +39,17 @@ namespace StockManagementSystem.Models
             myGridView.DataSource = dt;
             connection.Close();
         }
+<<<<<<< HEAD
 
         //fill combobox with data from db
         public void FillComboBox(string fetch, SqlConnection connection, ComboBox myComboBox)
         {
            
+=======
+        public void FillComboBox(string fetch, SqlConnection connection, ComboBox myComboBox)
+        {
+            //fill combobox with data from db
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
             SqlCommand command = new SqlCommand(fetch, connection);
             connection.Open();
             DataTable dt = new DataTable();
@@ -47,7 +59,10 @@ namespace StockManagementSystem.Models
             connection.Close();
         }
 
+<<<<<<< HEAD
         //input validation for number only input
+=======
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
         public void ValidationNumberOnly(KeyPressEventArgs e, Object sender)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
@@ -76,6 +91,7 @@ namespace StockManagementSystem.Models
             return result;
         }
 
+<<<<<<< HEAD
         //serial numbering in gridView rowHeader
         public void SerializeGrid(object sender )
         {
@@ -89,5 +105,7 @@ namespace StockManagementSystem.Models
             }
         }
 
+=======
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
     }
 }

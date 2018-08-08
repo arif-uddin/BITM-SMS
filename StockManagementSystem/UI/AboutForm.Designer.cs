@@ -35,9 +35,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+<<<<<<< HEAD
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+=======
+            this.BackColor = System.Drawing.Color.Khaki;
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
             this.ClientSize = new System.Drawing.Size(1073, 672);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AboutForm";

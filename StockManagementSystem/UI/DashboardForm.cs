@@ -11,7 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+<<<<<<< HEAD
 using StockManagementSystem.BLL;
+=======
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
 using StockManagementSystem.Models;
 
 namespace StockManagementSystem.UI
@@ -309,6 +312,7 @@ namespace StockManagementSystem.UI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
                 User user = new User();
                 user.userName = userNameTextBox.Text;
                 user.PassWord = passwordTextBox.Text;
@@ -362,6 +366,69 @@ namespace StockManagementSystem.UI
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
+=======
+            User user = new User();
+
+            try
+            {
+                user.userName = userNameTextBox.Text;
+                user.PassWord = passwordTextBox.Text;
+                string loginInfo = @"SELECT UserType FROM Users WHERE UserName='" + user.userName + "'AND Password='" + user.PassWord + "'";
+                connection.Open();
+                SqlCommand command = new SqlCommand(loginInfo, connection);
+                string userType = command.ExecuteScalar().ToString();
+                connection.Close();
+                if (Convert.ToInt32(userType) == 1)
+                {
+                    categoryButton.Enabled = true;
+                    companyButton.Enabled = true;
+                    itemButton.Enabled = true;
+                    stockInButton.Enabled = true;
+                    stockOutButton.Enabled = true;
+                    salesInfoButton.Enabled = true;
+                    summaryButton.Enabled = true;
+                    aboutButton.Enabled = true;
+
+                    homeButton.Visible = true;
+                
+                }
+                else if (Convert.ToInt32(userType) == 2)
+                {
+                    stockOutButton.Enabled = true;
+                    salesInfoButton.Enabled = true;
+                    summaryButton.Enabled = true;
+                }
+
+                userNameTextBox.Hide();
+                passwordTextBox.Hide();
+                loginButton.Hide();
+                logOutButton.Show();
+                
+                //welcomeLabel.Hide();
+                //smsLabel.Hide();
+                //companyNameLabel.Hide();
+
+                userIdentityLabel.Show();
+                userIdentityLabel.Text = userNameTextBox.Text;
+
+                formPanel.Show();
+
+                userNameTextBox.ResetText();
+                passwordTextBox.ResetText();
+
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                MessageBox.Show("Invalid Username Or Password");
+
+            }
+        }
+
+        private void DashboardForm_Load(object sender, EventArgs e)
+        {
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
             logOutButton.Hide();
             buttonIndicatorPanel.Hide();
             homeButton.Hide();
@@ -380,6 +447,7 @@ namespace StockManagementSystem.UI
             userNameTextBox.Text = "<username>";
             passwordTextBox.ForeColor = Color.Gray;
             passwordTextBox.Text = "<password>";
+<<<<<<< HEAD
         }
 
         private void logOutButton_Click(object sender, EventArgs e)
@@ -432,6 +500,48 @@ namespace StockManagementSystem.UI
             passwordTextBox.PasswordChar = '*';
             passwordTextBox.ResetText();
         }
+=======
+        }
+
+        private void logOutButton_Click(object sender, EventArgs e)
+        {
+            categoryButton.Enabled = false;
+            companyButton.Enabled = false;
+            itemButton.Enabled = false;
+            stockInButton.Enabled = false;
+            stockOutButton.Enabled = false;
+            salesInfoButton.Enabled = false;
+            summaryButton.Enabled = false;
+            aboutButton.Enabled = false;
+
+            userNameTextBox.ForeColor = Color.Gray;
+            userNameTextBox.Text = "<username>";
+            passwordTextBox.ForeColor = Color.Gray;
+            passwordTextBox.PasswordChar='\0';
+            passwordTextBox.Text = "<password>";
+
+            welcomeLabel.Show();
+            smsLabel.Show();
+            companyNameLabel.Show();
+
+            homeButton.Hide();
+
+            userNameTextBox.Show();
+            passwordTextBox.Show();
+            loginButton.Show();
+            logOutButton.Hide();
+            userIdentityLabel.Hide();
+
+            buttonIndicatorPanel.Hide();
+            CloseAlreadyOpenedForms();
+        }
+
+        private void homeButton_Click(object sender, EventArgs e)
+        {
+            CloseAlreadyOpenedForms();
+            UserForm _userForm = new UserForm();
+            ShowForm(_userForm);
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
 
         private void passwordTextBox_Enter(object sender, EventArgs e)
         {
@@ -446,5 +556,35 @@ namespace StockManagementSystem.UI
             userNameTextBox.ResetText();
         }
 
+        }
+
+        private void userNameTextBox_Click(object sender, EventArgs e)
+        {
+            userNameTextBox.ForeColor = Color.Black;
+            userNameTextBox.ResetText();
+        }
+
+        private void passwordTextBox_Click(object sender, EventArgs e)
+        {
+            passwordTextBox.ForeColor = Color.Black;
+            passwordTextBox.PasswordChar = '*';
+            passwordTextBox.ResetText();
+        }
+
+        private void passwordTextBox_Enter(object sender, EventArgs e)
+        {
+            passwordTextBox.ForeColor = Color.Black;
+            passwordTextBox.PasswordChar = '*';
+            passwordTextBox.ResetText();
+        }
+
+        private void userNameTextBox_Enter(object sender, EventArgs e)
+        {
+            userNameTextBox.ForeColor = Color.Black;
+            userNameTextBox.ResetText();
+        }
+
+
+        //Methods End
     }
 }

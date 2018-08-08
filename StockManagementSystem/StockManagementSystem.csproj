@@ -47,10 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="BLL\CategoryManager.cs" />
     <Compile Include="BLL\UserManager.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
     <Compile Include="DAL\UserRepository.cs" />
+=======
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\FormCommon.cs" />

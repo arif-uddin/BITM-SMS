@@ -84,8 +84,22 @@ namespace StockManagementSystem.UI
 
         private void companyGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+<<<<<<< HEAD
             //Serialize the gridview    
            _common.SerializeGrid(sender);
+=======
+
+            //Serialize the gridview    
+            DataGridView companyGridViewView = sender as DataGridView;
+            if (null != companyGridViewView)
+            {
+                foreach (DataGridViewRow r in companyGridViewView.Rows)
+                {
+                    companyGridViewView.Rows[r.Index].HeaderCell.Value =
+                        (r.Index + 1).ToString();
+                }
+            }
+>>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
         }
 
         private void companyGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
