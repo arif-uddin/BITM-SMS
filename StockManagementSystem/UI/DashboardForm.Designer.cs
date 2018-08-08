@@ -143,11 +143,7 @@
             this.aboutButton.Name = "aboutButton";
             this.aboutButton.Size = new System.Drawing.Size(183, 55);
             this.aboutButton.TabIndex = 8;
-<<<<<<< HEAD
-            this.aboutButton.Text = "  About Us";
-=======
             this.aboutButton.Text = "  About";
->>>>>>> 77e4f1da0cbd62bfe7f1e0f83f913f45a0c75714
             this.aboutButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.aboutButton.UseVisualStyleBackColor = true;
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
